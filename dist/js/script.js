@@ -106,7 +106,6 @@ function form() {
   };
 
   let form = document.querySelectorAll('.form'),
-      input = document.querySelectorAll('input'),
       statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
       statusMessage.style.cssText = `
@@ -125,7 +124,7 @@ function form() {
         elem[i][j].addEventListener('input', function () {
           if (this.name === 'user_name') {
             elem[i].insertBefore(statusMessage, elem[i].children[1]);
-            let re = (/^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$/);
+            let re = (/^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']{1,20}$/);
             if (re.test(String(this.value)) === true ) {
               name = true;
               statusMessage.style.cssText = 'text-align:center;z-index:10001;top:190px;position:absolute;';
@@ -185,7 +184,7 @@ function form() {
           let json = JSON.stringify(obj);
           request.send(json);
           request.onreadystatechange = function () {
-            statusMessage.style.cssText = 'text-align:center;z-index:10001;top:400px;left:60px;position:absolute;';
+            statusMessage.style.cssText = 'text-align:center;z-index:10001;top:400px;left:35px;position:absolute;';
             if (request.readyState < 4) {
               statusMessage.innerHTML = message.loading;
             } else if (request.readyState === 4 && request.status == 200) {
@@ -194,15 +193,11 @@ function form() {
               statusMessage.innerHTML = message.failure;
             }
           };
-          for (let i = 0; i < input.length; i++) {
-              input[i].value = '';
-            }
         }
-      });
+  });
     }
   }
-  
-  sendForm(form);
+    sendForm(form);
 }
 
 module.exports = form;
@@ -221,27 +216,180 @@ module.exports = form;
 
 function modal() {
   let callBtn = document.querySelector('.popup_engineer_btn'),
-    modalEnginer = document.querySelector('.popup_engineer'),
-    modalEnginerClose = document.querySelector('.popup_engineer > div > div > button > strong'),
-    telBtn = document.querySelector('.phone_link'),
-    modalTel = document.querySelector('.popup'),
-    modalTelClose = document.querySelector('div.popup > div > div > button > strong');
+      modalEnginer = document.querySelector('.popup_engineer'),
+      modalEnginerClose = document.querySelector('.popup_engineer > div > div > button > strong'),
+      telBtn = document.querySelector('.phone_link'),
+      modalTel = document.querySelector('.popup'),
+      modalTelClose = document.querySelector('div.popup > div > div > button > strong'),
+      modalContent = document.querySelector('.popup_content'),
+      callMaster = document.querySelector('body > section.feedback > div > div > a'),
+      body = document.querySelector('body');
 
-
-  function showModal(show, modal, close) {
+  function showModal(show, modal, close, modcontent) {
     show.addEventListener('click', function () {
       modal.style.display = 'block';
+      body.classList.add('modal-open');
     });
     close.addEventListener('click', function () {
       modal.style.display = 'none';
+      body.classList.remove('modal-open');
+    });
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        body.classList.remove('modal-open');
+      }
     });
   }
 
-  showModal(callBtn, modalEnginer, modalEnginerClose);
-  showModal(telBtn, modalTel, modalTelClose);
+  showModal(callBtn, modalEnginer, modalEnginerClose, modalContent);
+  showModal(telBtn, modalTel, modalTelClose, modalContent);
+  showModal(callMaster, modalTel, modalTelClose, modalContent);
 }
 
 module.exports = modal;
+
+
+
+/***/ }),
+
+/***/ "./src/js/parts/tabs.js":
+/*!******************************!*\
+  !*** ./src/js/parts/tabs.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*jshint -W117*/
+/*jshint -W083*/
+
+function tabs() {
+let tabContent = document.querySelectorAll('.tree, .aluminum, .plastic, .french, .rise'),
+    tabBtn = document.querySelectorAll('.glazing_block');
+    tree = document.querySelector('.tree');
+
+
+for (let i = 0; i < tabBtn.length; i++) {
+  tabBtn[i].addEventListener('click', (event) => {
+  let target = event.target;
+    if (target && target.classList.contains('tree_link')) {
+      tabContent.forEach(item => {
+        item.style.display = 'none';
+        item.classList.remove('active');
+        if (item.classList.contains('tree')) {
+          item.style.display = 'block';
+          item.classList.add('active');
+        }
+      });
+    } 
+    if (target && target.classList.contains('aluminum_link')) {
+      tabContent.forEach(item => {
+        item.style.display = 'none';
+        item.classList.remove('active');
+        if (item.classList.contains('aluminum')) {
+          item.style.display = 'block';
+          item.classList.add('active');
+        }
+      });
+    }
+    if (target && target.classList.contains('plastic_link')) {
+      tabContent.forEach(item => {
+        item.style.display = 'none';
+        item.classList.remove('active');
+        if (item.classList.contains('plastic')) {
+          item.style.display = 'block';
+          item.classList.add('active');
+        }
+      });
+    }
+    if (target && target.classList.contains('french_link')) {
+      tabContent.forEach(item => {
+        item.style.display = 'none';
+        item.classList.remove('active');
+        if (item.classList.contains('french')) {
+          item.style.display = 'block';
+          item.classList.add('active');
+        }
+      });
+    }
+    if (target && target.classList.contains('rise_link')) {
+      tabContent.forEach(item => {
+        item.style.display = 'none';
+        item.classList.remove('active');
+        if (item.classList.contains('rise')) {
+          item.style.display = 'block';
+          item.classList.add('active');
+        }
+      });
+    }
+  });
+}
+
+}
+
+module.exports = tabs;
+
+/***/ }),
+
+/***/ "./src/js/parts/timer.js":
+/*!*******************************!*\
+  !*** ./src/js/parts/timer.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*jshint -W117*/
+/*jshint -W083*/
+
+function timer() {
+  let deadline = "December 18 2019 00:00:00";
+
+  let getTimeRemaining = (endtime) => {
+    let t = Date.parse(endtime) - Date.parse(new Date()),
+      seconds = Math.floor((t / 1000) % 60),
+      minutes = Math.floor((t / 1000 / 60) % 60),
+      hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+      days = Math.floor((t / (1000 * 60 * 60 * 24)));
+    return {
+      'total': t,
+      'days': days,
+      'hours': hours,
+      'minutes': minutes,
+      'seconds': seconds
+    };
+  };
+  let setClock = (id, endtime) => {
+    let timer = document.getElementById(id),
+      days = timer.querySelector('#days'),
+      hours = timer.querySelector('#hours'),
+      minutes = timer.querySelector('#minutes > span'),
+      seconds = timer.querySelector('#seconds > span'),
+      t = getTimeRemaining(endtime),
+      timeInterval = setInterval(updateClock, 1000);
+    if (t.total <= 0) {
+      clearInterval(timeInterval);
+      days.textContent = '00';
+      hours.textContent = '00';
+      minutes.textContent = '00';
+      seconds.textContent = '00';
+    } else if (t.total > 0) {
+      updateClock();
+    }
+
+    function updateClock() {
+      let t = getTimeRemaining(endtime);
+      days.textContent = ("0" + t.days).slice(-3);
+      hours.textContent = ("0" + t.hours).slice(-2);
+      minutes.textContent = ("0" + t.minutes).slice(-2);
+      seconds.textContent = ("0" + t.seconds).slice(-2);
+    }
+  };
+
+  setClock('timer', deadline);
+
+}
+
+module.exports = timer;
 
 /***/ }),
 
@@ -265,20 +413,22 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   let modal = __webpack_require__(/*! ./parts/modal.js */ "./src/js/parts/modal.js"),
-      form = __webpack_require__(/*! ./parts/form.js */ "./src/js/parts/form.js");
+      form = __webpack_require__(/*! ./parts/form.js */ "./src/js/parts/form.js"),
+      tabs = __webpack_require__(/*! ./parts/tabs.js */ "./src/js/parts/tabs.js"),
+      timer = __webpack_require__(/*! ./parts/timer.js */ "./src/js/parts/timer.js");
   // let calc = require('./parts/calc.js'),
   //     
   //     slider = require('./parts/slider.js'),
-  //     tabs = require('./parts/tabs.js'),
-  //     timer = require('./parts/timer.js'),
-  //     
+    
     modal();
     form();
+    tabs();
+    timer();
   // calc();
   // 
   // slider();
-  // tabs();
-  // timer();
+    
+    
     
 
 });
