@@ -32,6 +32,26 @@ function modal() {
   showModal(callBtn, modalEnginer, modalEnginerClose, modalContent);
   showModal(telBtn, modalTel, modalTelClose, modalContent);
   showModal(callMaster, modalTel, modalTelClose, modalContent);
+
+  function tabsTime(show, modal, close, modcontent) {
+    modal.style.display = 'block';
+    body.classList.add('modal-open');
+    close.addEventListener('click', function () {
+      modal.style.display = 'none';
+      body.classList.remove('modal-open');
+    });
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        body.classList.remove('modal-open');
+      }
+    });
+  }
+
+  setTimeout(function () {
+    tabsTime(telBtn, modalTel, modalTelClose, modalContent);
+  }, 60000); 
+
 }
 
 module.exports = modal;

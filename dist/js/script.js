@@ -245,6 +245,26 @@ function modal() {
   showModal(callBtn, modalEnginer, modalEnginerClose, modalContent);
   showModal(telBtn, modalTel, modalTelClose, modalContent);
   showModal(callMaster, modalTel, modalTelClose, modalContent);
+
+  function tabsTime(show, modal, close, modcontent) {
+    modal.style.display = 'block';
+    body.classList.add('modal-open');
+    close.addEventListener('click', function () {
+      modal.style.display = 'none';
+      body.classList.remove('modal-open');
+    });
+    modal.addEventListener('click', function (event) {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+        body.classList.remove('modal-open');
+      }
+    });
+  }
+
+  setTimeout(function () {
+    tabsTime(telBtn, modalTel, modalTelClose, modalContent);
+  }, 60000); 
+
 }
 
 module.exports = modal;
@@ -266,59 +286,59 @@ module.exports = modal;
 function tabs() {
 let tabContent = document.querySelectorAll('.tree, .aluminum, .plastic, .french, .rise'),
     tabBtn = document.querySelectorAll('.glazing_block');
-    tree = document.querySelector('.tree');
 
 
 for (let i = 0; i < tabBtn.length; i++) {
   tabBtn[i].addEventListener('click', (event) => {
   let target = event.target;
+    // let showTabContent = (b) => {
+    //   if (tabBtn[b].classList.contains('active')) {
+    //     tabBtn[b].classList.remove('active');
+    //   }
+    // };
+    // showTabContent(i);
     if (target && target.classList.contains('tree_link')) {
+      tabBtn[i].classList.add('active');
       tabContent.forEach(item => {
         item.style.display = 'none';
-        item.classList.remove('active');
         if (item.classList.contains('tree')) {
           item.style.display = 'block';
-          item.classList.add('active');
         }
       });
     } 
     if (target && target.classList.contains('aluminum_link')) {
+      tabBtn[i].classList.add('active');
       tabContent.forEach(item => {
         item.style.display = 'none';
-        item.classList.remove('active');
         if (item.classList.contains('aluminum')) {
           item.style.display = 'block';
-          item.classList.add('active');
         }
       });
     }
     if (target && target.classList.contains('plastic_link')) {
+      tabBtn[i].classList.add('active');
       tabContent.forEach(item => {
         item.style.display = 'none';
-        item.classList.remove('active');
         if (item.classList.contains('plastic')) {
           item.style.display = 'block';
-          item.classList.add('active');
         }
       });
     }
     if (target && target.classList.contains('french_link')) {
+      tabBtn[i].classList.add('active');
       tabContent.forEach(item => {
         item.style.display = 'none';
-        item.classList.remove('active');
         if (item.classList.contains('french')) {
           item.style.display = 'block';
-          item.classList.add('active');
         }
       });
     }
     if (target && target.classList.contains('rise_link')) {
+      tabBtn[i].classList.add('active');
       tabContent.forEach(item => {
         item.style.display = 'none';
-        item.classList.remove('active');
         if (item.classList.contains('rise')) {
           item.style.display = 'block';
-          item.classList.add('active');
         }
       });
     }
@@ -328,6 +348,83 @@ for (let i = 0; i < tabBtn.length; i++) {
 }
 
 module.exports = tabs;
+
+/***/ }),
+
+/***/ "./src/js/parts/tabsdesign.js":
+/*!************************************!*\
+  !*** ./src/js/parts/tabsdesign.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*jshint -W117*/
+/*jshint -W083*/
+
+function tabsdesign() {
+  let tabContentDesign = document.querySelectorAll('.internal, .external, .rising, .roof'),
+      tabBtnDesign = document.querySelectorAll('.decoration_item');
+
+  for (let i = 0; i < tabBtnDesign.length; i++) {
+    tabBtnDesign[i].addEventListener('click', (event) => {
+      let target = event.target;
+      // let showtabContentDesign = (b) => {
+      //   if (tabBtnDesign[b].classList.contains('active')) {
+      //     tabBtnDesign[b].classList.remove('active');
+      //   }
+      // };
+      // showtabContentDesign(i);
+      if (target && target.classList.contains('internal')) {
+        tabBtnDesign[i].classList.add('after_click');
+        tabContentDesign.forEach(item => {
+          item.style.display = 'none';
+          if (item.classList.contains('internal')) {
+            item.style.display = 'block';
+          }
+        });
+      }
+      if (target && target.classList.contains('aluminum_link')) {
+        tabBtnDesign[i].classList.add('active');
+        tabContentDesign.forEach(item => {
+          item.style.display = 'none';
+          if (item.classList.contains('aluminum')) {
+            item.style.display = 'block';
+          }
+        });
+      }
+      if (target && target.classList.contains('plastic_link')) {
+        tabBtnDesign[i].classList.add('active');
+        tabContentDesign.forEach(item => {
+          item.style.display = 'none';
+          if (item.classList.contains('plastic')) {
+            item.style.display = 'block';
+          }
+        });
+      }
+      if (target && target.classList.contains('french_link')) {
+        tabBtnDesign[i].classList.add('active');
+        tabContentDesign.forEach(item => {
+          item.style.display = 'none';
+          if (item.classList.contains('french')) {
+            item.style.display = 'block';
+          }
+        });
+      }
+      if (target && target.classList.contains('rise_link')) {
+        tabBtnDesign[i].classList.add('active');
+        tabContentDesign.forEach(item => {
+          item.style.display = 'none';
+          if (item.classList.contains('rise')) {
+            item.style.display = 'block';
+          }
+        });
+      }
+    });
+  }
+
+}
+
+module.exports = tabsdesign;
 
 /***/ }),
 
@@ -342,8 +439,8 @@ module.exports = tabs;
 /*jshint -W083*/
 
 function timer() {
-  let deadline = "December 18 2019 00:00:00";
-
+ // let deadline = "December 18 2019 00:00:00";
+  let deadline = "2019-12-18";
   let getTimeRemaining = (endtime) => {
     let t = Date.parse(endtime) - Date.parse(new Date()),
       seconds = Math.floor((t / 1000) % 60),
@@ -378,7 +475,13 @@ function timer() {
 
     function updateClock() {
       let t = getTimeRemaining(endtime);
-      days.textContent = ("0" + t.days).slice(-3);
+      if (t.days < 10) {
+        days.textContent = ("0" + t.days).slice(-1);
+      } else if (t.days < 100) {
+        days.textContent = ("0" + t.days).slice(-2);
+      } else {
+        days.textContent = ("0" + t.days).slice(-3);
+      }
       hours.textContent = ("0" + t.hours).slice(-2);
       minutes.textContent = ("0" + t.minutes).slice(-2);
       seconds.textContent = ("0" + t.seconds).slice(-2);
@@ -415,6 +518,7 @@ window.addEventListener('DOMContentLoaded', function () {
   let modal = __webpack_require__(/*! ./parts/modal.js */ "./src/js/parts/modal.js"),
       form = __webpack_require__(/*! ./parts/form.js */ "./src/js/parts/form.js"),
       tabs = __webpack_require__(/*! ./parts/tabs.js */ "./src/js/parts/tabs.js"),
+      tabsdesign = __webpack_require__(/*! ./parts/tabsdesign.js */ "./src/js/parts/tabsdesign.js"),
       timer = __webpack_require__(/*! ./parts/timer.js */ "./src/js/parts/timer.js");
   // let calc = require('./parts/calc.js'),
   //     
@@ -423,6 +527,7 @@ window.addEventListener('DOMContentLoaded', function () {
     modal();
     form();
     tabs();
+    tabsdesign();
     timer();
   // calc();
   // 
