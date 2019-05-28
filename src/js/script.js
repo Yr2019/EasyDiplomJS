@@ -14,8 +14,8 @@ window.addEventListener('DOMContentLoaded', function () {
       form = require('./parts/form.js'),
       tabs = require('./parts/tabs.js'),
       tabsdesign = require('./parts/tabsdesign.js'),
-      timer = require('./parts/timer.js');
-  // let calc = require('./parts/calc.js'),
+      timer = require('./parts/timer.js'),
+      calc = require('./parts/calc.js');
   //     
   //     slider = require('./parts/slider.js'),
     
@@ -24,7 +24,7 @@ window.addEventListener('DOMContentLoaded', function () {
     tabs();
     tabsdesign();
     timer();
-  // calc();
+    calc();
   // 
   // slider();
     

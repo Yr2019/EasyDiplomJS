@@ -2,62 +2,37 @@
 /*jshint -W083*/
 
 function tabsdesign() {
-  let tabContentDesign = document.querySelectorAll('.internal, .external, .rising, .roof'),
-      tabBtnDesign = document.querySelectorAll('.decoration_item');
+  let tabContent = document.querySelectorAll('.internal, .external, .rising, .roof'),
+      tabBtn = document.querySelectorAll('.internal_link, .external_link, .rising_link, .roof_link');
 
-  for (let i = 0; i < tabBtnDesign.length; i++) {
-    tabBtnDesign[i].addEventListener('click', (event) => {
+
+  for (let i = 0; i < tabBtn.length; i++) {
+    tabBtn[i].addEventListener('click', (event) => {
       let target = event.target;
-      // let showtabContentDesign = (b) => {
-      //   if (tabBtnDesign[b].classList.contains('active')) {
-      //     tabBtnDesign[b].classList.remove('active');
-      //   }
-      // };
-      // showtabContentDesign(i);
-      if (target && target.classList.contains('internal')) {
-        tabBtnDesign[i].classList.add('after_click');
-        tabContentDesign.forEach(item => {
-          item.style.display = 'none';
-          if (item.classList.contains('internal')) {
-            item.style.display = 'block';
+      let showTabContent = function (b) {
+        for (let j = 0; j < tabContent.length; j++) {
+          tabContent[j].style.display = 'none';
+          // tabBtn[i].classList.remove('after_click');
+          // tabBtn[i].classList.add('no_click');
+          //tabBtn[i].classList.remove('active');  Пока не придумал как удалять актывной клас когда переключаешся между табамы
+          if (target.innerHTML == b ) {
+            tabBtn[i].classList.remove('no_click');
+            tabBtn[i].classList.add('after_click');
+           tabContent[i].style.display = 'block';
           }
-        });
+        }
+      };
+      if (target.innerHTML === 'Внутренняя отделка') {
+        showTabContent('Внутренняя отделка');
       }
-      if (target && target.classList.contains('aluminum_link')) {
-        tabBtnDesign[i].classList.add('active');
-        tabContentDesign.forEach(item => {
-          item.style.display = 'none';
-          if (item.classList.contains('aluminum')) {
-            item.style.display = 'block';
-          }
-        });
+      if (target.innerHTML === 'Внешняя отделка') {
+        showTabContent('Внешняя отделка');
       }
-      if (target && target.classList.contains('plastic_link')) {
-        tabBtnDesign[i].classList.add('active');
-        tabContentDesign.forEach(item => {
-          item.style.display = 'none';
-          if (item.classList.contains('plastic')) {
-            item.style.display = 'block';
-          }
-        });
+      if (target.innerHTML === 'Выносное остекление') {
+        showTabContent('Выносное остекление');
       }
-      if (target && target.classList.contains('french_link')) {
-        tabBtnDesign[i].classList.add('active');
-        tabContentDesign.forEach(item => {
-          item.style.display = 'none';
-          if (item.classList.contains('french')) {
-            item.style.display = 'block';
-          }
-        });
-      }
-      if (target && target.classList.contains('rise_link')) {
-        tabBtnDesign[i].classList.add('active');
-        tabContentDesign.forEach(item => {
-          item.style.display = 'none';
-          if (item.classList.contains('rise')) {
-            item.style.display = 'block';
-          }
-        });
+      if (target.innerHTML === 'Крыша на балкон') {
+        showTabContent('Крыша на балкон');
       }
     });
   }

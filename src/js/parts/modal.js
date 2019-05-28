@@ -10,10 +10,15 @@ function modal() {
       modalTelClose = document.querySelector('div.popup > div > div > button > strong'),
       modalContent = document.querySelector('.popup_content'),
       callMaster = document.querySelector('body > section.feedback > div > div > a'),
-      body = document.querySelector('body');
-
+      body = document.querySelector('body'),
+      url = document.querySelector('.phone_link');
+      
+      
   function showModal(show, modal, close, modcontent) {
-    show.addEventListener('click', function () {
+    show.addEventListener('click', function (event) {
+      if (event.target) {
+      event.preventDefault();
+      }
       modal.style.display = 'block';
       body.classList.add('modal-open');
     });
