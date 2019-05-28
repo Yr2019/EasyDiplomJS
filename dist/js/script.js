@@ -379,6 +379,105 @@ module.exports = form;
 
 /***/ }),
 
+/***/ "./src/js/parts/largeImage.js":
+/*!************************************!*\
+  !*** ./src/js/parts/largeImage.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/*jshint -W117*/
+/*jshint -W083*/
+
+
+function largeImage() {
+  
+function renderModal(element) {
+  let modalCre = document.createElement('div');
+  modalCre.classList.add('modal');
+  modalCre.setAttribute("id", "myModal");
+  let child = document.createElement('span');
+  child.classList.add('close');
+  child.innerHTML += "+";
+  let child2 = document.createElement('img');
+  child2.classList.add('modal-content');
+  child2.setAttribute("id", "img01");
+  child2.innerHTML = element;
+  modalCre.appendChild(child);
+  modalCre.appendChild(child2);
+  document.body.appendChild(modalCre);
+}
+renderModal();
+
+let images = document.querySelectorAll('body > section.works > div > div.row > div > a');
+let modal = document.getElementById('myModal');
+let modalImg = document.getElementById("img01");
+
+
+function ChangeImage() {
+  images.forEach(function (element) {
+    element.addEventListener('click', function (event) {
+      event.preventDefault();
+      
+      let target = event.target;
+      modal.style.display = "block";
+      modalImg.src = this.href;
+    });
+  });
+
+  modal.addEventListener('click', function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function () {
+    modal.style.display = "none";
+  };
+}
+
+  ChangeImage();
+
+}
+
+
+module.exports = largeImage;
+
+
+
+// function largeImage() {
+//   let images = document.querySelectorAll('body > section.works > div > div.row > div > a');
+//   var modal = document.getElementById('myModal');
+//   var modalImg = document.getElementById("img01");
+
+//   images.forEach(function (element) {
+//     element.addEventListener('click', function (event) {
+//       event.preventDefault();
+//       let target = event.target;
+//         modal.style.display = "block";
+//         modalImg.src = this.href;
+//     });
+//   });
+
+//   modal.addEventListener('click', function (event) {
+//     if (event.target === modal) {
+//       modal.style.display = 'none';
+//     }
+//   });
+
+//   var span = document.getElementsByClassName("close")[0];
+//   span.onclick = function () {
+//     modal.style.display = "none";
+//   };
+
+// }
+
+
+//  module.exports = largeImage;
+
+/***/ }),
+
 /***/ "./src/js/parts/modal.js":
 /*!*******************************!*\
   !*** ./src/js/parts/modal.js ***!
@@ -650,9 +749,9 @@ window.addEventListener('DOMContentLoaded', function () {
       tabs = __webpack_require__(/*! ./parts/tabs.js */ "./src/js/parts/tabs.js"),
       tabsdesign = __webpack_require__(/*! ./parts/tabsdesign.js */ "./src/js/parts/tabsdesign.js"),
       timer = __webpack_require__(/*! ./parts/timer.js */ "./src/js/parts/timer.js"),
+      largeImage = __webpack_require__(/*! ./parts/largeImage.js */ "./src/js/parts/largeImage.js"),
       calc = __webpack_require__(/*! ./parts/calc.js */ "./src/js/parts/calc.js");
-  //     
-  //     slider = require('./parts/slider.js'),
+
     
     modal();
     form();
@@ -660,8 +759,8 @@ window.addEventListener('DOMContentLoaded', function () {
     tabsdesign();
     timer();
     calc();
-  // 
-  // slider();
+    largeImage();
+
     
     
     

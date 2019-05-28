@@ -15,9 +15,9 @@ window.addEventListener('DOMContentLoaded', function () {
       tabs = require('./parts/tabs.js'),
       tabsdesign = require('./parts/tabsdesign.js'),
       timer = require('./parts/timer.js'),
+      largeImage = require('./parts/largeImage.js'),
       calc = require('./parts/calc.js');
-  //     
-  //     slider = require('./parts/slider.js'),
+
     
     modal();
     form();
@@ -25,8 +25,8 @@ window.addEventListener('DOMContentLoaded', function () {
     tabsdesign();
     timer();
     calc();
-  // 
-  // slider();
+    largeImage();
+
     
     
     
