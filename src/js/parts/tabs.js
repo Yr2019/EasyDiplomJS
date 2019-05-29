@@ -5,19 +5,23 @@ function tabs() {
 let tabContent = document.querySelectorAll('.tree, .aluminum, .plastic, .french, .rise'),
     tabBtn = document.querySelectorAll('.slick-slide > a');
     
-  [...tabContent, ...tabBtn].forEach(function (tab, index) {
-    tab.addEventListener('click', toggleItem.bind(this, tab, tabContent, tabBtn, index));
+  tabBtn.forEach(function (tab, a) {
+    tab.addEventListener('click', toggleItem.bind(this, tab, tabBtn, a));
   });
 
-  function toggleItem(item, tabContent, tabBtn, index) {
+  function toggleItem(item, tabBtn, a) {
     for (let sibling of tabBtn) {
       sibling.classList.remove('active');
     }
+    item.classList.add('active');
+    changeContent(a);
+  }
+
+  function changeContent(a) {
     for (let sibling of tabContent) {
       sibling.style.display = 'none';
     }
-    item.classList.add('active');
-    tabContent[index - 5].style.display = 'block';
+    tabContent[a].style.display = 'block';
   }
 
 }

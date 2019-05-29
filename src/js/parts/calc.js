@@ -100,22 +100,32 @@ function resultInfo() {
   });
 
   let checkbox = document.querySelectorAll('.label, input[type="checkbox"]');
-    checkbox.forEach(element => {
-    element.addEventListener('click', function (event) {
-      for (var i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].type === 'checkbox' && checkbox[i].checked) {
-          checkbox.checked = checkbox[i].value;
-          if (checkbox[i + 1].innerHTML === 'Холодное') {
-            objCalc.windowSeason = 'cold';
-            checkbox[i + 2].disabled = true;
-          } else if (checkbox[i + 1].innerHTML === 'Теплое') {
-            checkbox[i - 2].disabled = true;
-            objCalc.windowSeason = 'warm';
-          }
-        }
+
+  checkbox.forEach(function (tab, a) {
+    tab.addEventListener('change', toggleItem.bind(this, tab, checkbox, a));
+  });
+
+  function toggleItem(item, tabBtn, a) {
+    if (item.type === 'checkbox' && item.checked) {
+      item.checked = item.value;
+      if (tabBtn[a + 1].innerHTML === 'Холодное') {
+        objCalc.windowSeason = 'cold';
+        tabBtn[a + 2].disabled = true;
+        console.log('cold');
+      } else if (tabBtn[a + 1].innerHTML === 'Теплое') {
+        objCalc.windowSeason = 'warm';
+        tabBtn[a - 2].disabled = true;
+        console.log('warm');
       }
-    });
-    });
+    } else if (item.type === 'checkbox' && item.checked === false) {
+      if (a == 0) {
+        tabBtn[a + 2].disabled = false;
+      } else if (a == 2) {
+        tabBtn[a - 2].disabled = false;
+      }
+        console.log('none');
+    }
+  }
 }
 
 resultCalc(resultBtn, resultCalcModal, resultCalcClose, calcModal);

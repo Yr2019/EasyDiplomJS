@@ -195,22 +195,32 @@ function resultInfo() {
   });
 
   let checkbox = document.querySelectorAll('.label, input[type="checkbox"]');
-    checkbox.forEach(element => {
-    element.addEventListener('click', function (event) {
-      for (var i = 0; i < checkbox.length; i++) {
-        if (checkbox[i].type === 'checkbox' && checkbox[i].checked) {
-          checkbox.checked = checkbox[i].value;
-          if (checkbox[i + 1].innerHTML === 'Холодное') {
-            objCalc.windowSeason = 'cold';
-            checkbox[i + 2].disabled = true;
-          } else if (checkbox[i + 1].innerHTML === 'Теплое') {
-            checkbox[i - 2].disabled = true;
-            objCalc.windowSeason = 'warm';
-          }
-        }
+
+  checkbox.forEach(function (tab, a) {
+    tab.addEventListener('change', toggleItem.bind(this, tab, checkbox, a));
+  });
+
+  function toggleItem(item, tabBtn, a) {
+    if (item.type === 'checkbox' && item.checked) {
+      item.checked = item.value;
+      if (tabBtn[a + 1].innerHTML === 'Холодное') {
+        objCalc.windowSeason = 'cold';
+        tabBtn[a + 2].disabled = true;
+        console.log('cold');
+      } else if (tabBtn[a + 1].innerHTML === 'Теплое') {
+        objCalc.windowSeason = 'warm';
+        tabBtn[a - 2].disabled = true;
+        console.log('warm');
       }
-    });
-    });
+    } else if (item.type === 'checkbox' && item.checked === false) {
+      if (a == 0) {
+        tabBtn[a + 2].disabled = false;
+      } else if (a == 2) {
+        tabBtn[a - 2].disabled = false;
+      }
+        console.log('none');
+    }
+  }
 }
 
 resultCalc(resultBtn, resultCalcModal, resultCalcClose, calcModal);
@@ -568,19 +578,23 @@ function tabs() {
 let tabContent = document.querySelectorAll('.tree, .aluminum, .plastic, .french, .rise'),
     tabBtn = document.querySelectorAll('.slick-slide > a');
     
-  [...tabContent, ...tabBtn].forEach(function (tab, index) {
-    tab.addEventListener('click', toggleItem.bind(this, tab, tabContent, tabBtn, index));
+  tabBtn.forEach(function (tab, a) {
+    tab.addEventListener('click', toggleItem.bind(this, tab, tabBtn, a));
   });
 
-  function toggleItem(item, tabContent, tabBtn, index) {
+  function toggleItem(item, tabBtn, a) {
     for (let sibling of tabBtn) {
       sibling.classList.remove('active');
     }
+    item.classList.add('active');
+    changeContent(a);
+  }
+
+  function changeContent(a) {
     for (let sibling of tabContent) {
       sibling.style.display = 'none';
     }
-    item.classList.add('active');
-    tabContent[index - 5].style.display = 'block';
+    tabContent[a].style.display = 'block';
   }
 
 }
