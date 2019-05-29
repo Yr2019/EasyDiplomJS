@@ -107,7 +107,9 @@ function resultInfo() {
           checkbox.checked = checkbox[i].value;
           if (checkbox[i + 1].innerHTML === 'Холодное') {
             objCalc.windowSeason = 'cold';
+            checkbox[i + 2].disabled = true;
           } else if (checkbox[i + 1].innerHTML === 'Теплое') {
+            checkbox[i - 2].disabled = true;
             objCalc.windowSeason = 'warm';
           }
         }

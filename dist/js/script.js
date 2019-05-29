@@ -202,7 +202,9 @@ function resultInfo() {
           checkbox.checked = checkbox[i].value;
           if (checkbox[i + 1].innerHTML === 'Холодное') {
             objCalc.windowSeason = 'cold';
+            checkbox[i + 2].disabled = true;
           } else if (checkbox[i + 1].innerHTML === 'Теплое') {
+            checkbox[i - 2].disabled = true;
             objCalc.windowSeason = 'warm';
           }
         }
@@ -564,40 +566,22 @@ module.exports = modal;
 
 function tabs() {
 let tabContent = document.querySelectorAll('.tree, .aluminum, .plastic, .french, .rise'),
-    //tabBtn = document.querySelectorAll('.glazing_block');
     tabBtn = document.querySelectorAll('.slick-slide > a');
+    
+  [...tabContent, ...tabBtn].forEach(function (tab, index) {
+    tab.addEventListener('click', toggleItem.bind(this, tab, tabContent, tabBtn, index));
+  });
 
-
-  for (let i = 0; i < tabBtn.length; i++) {
-    tabBtn[i].addEventListener('click', (event) => {
-    let target = event.target;
-    let showTabContent =  function (b) {
-      tabContent.forEach(item => {
-        item.style.display = 'none';
-        //tabBtn[i].classList.remove('active');  Пока не придумал как удалять актывной клас когда переключаешся между табамы
-        if (item.classList.contains(b)) {
-          tabBtn[i].classList.add('active');
-          item.style.display = 'block';
-        }
-      });
-    };
-    if (target && target.classList.contains('tree_link')) {
-      showTabContent('tree');
+  function toggleItem(item, tabContent, tabBtn, index) {
+    for (let sibling of tabBtn) {
+      sibling.classList.remove('active');
     }
-    if (target && target.classList.contains('aluminum_link')) {
-      showTabContent('aluminum');
+    for (let sibling of tabContent) {
+      sibling.style.display = 'none';
     }
-    if (target && target.classList.contains('plastic_link')) {
-      showTabContent('plastic');
-    }
-    if (target && target.classList.contains('french_link')) {
-      showTabContent('french');
-    }
-    if (target && target.classList.contains('rise_link')) {
-      showTabContent('rise');
-    }
-});
-}
+    item.classList.add('active');
+    tabContent[index - 5].style.display = 'block';
+  }
 
 }
 
@@ -616,39 +600,22 @@ module.exports = tabs;
 /*jshint -W083*/
 
 function tabsdesign() {
-  let tabContent = document.querySelectorAll('.internal, .external, .rising, .roof'),
-      tabBtn = document.querySelectorAll('.internal_link, .external_link, .rising_link, .roof_link');
+  let tabContent = document.querySelectorAll('.decoration_item div'),
+      tabBtn = document.querySelectorAll('.internal, .external, .rising, .roof');
 
-
-  for (let i = 0; i < tabBtn.length; i++) {
-    tabBtn[i].addEventListener('click', (event) => {
-      let target = event.target;
-      let showTabContent = function (b) {
-        for (let j = 0; j < tabContent.length; j++) {
-          tabContent[j].style.display = 'none';
-          // tabBtn[i].classList.remove('after_click');
-          // tabBtn[i].classList.add('no_click');
-          //tabBtn[i].classList.remove('active');  Пока не придумал как удалять актывной клас когда переключаешся между табамы
-          if (target.innerHTML == b ) {
-            tabBtn[i].classList.remove('no_click');
-            tabBtn[i].classList.add('after_click');
-           tabContent[i].style.display = 'block';
-          }
-        }
-      };
-      if (target.innerHTML === 'Внутренняя отделка') {
-        showTabContent('Внутренняя отделка');
-      }
-      if (target.innerHTML === 'Внешняя отделка') {
-        showTabContent('Внешняя отделка');
-      }
-      if (target.innerHTML === 'Выносное остекление') {
-        showTabContent('Выносное остекление');
-      }
-      if (target.innerHTML === 'Крыша на балкон') {
-        showTabContent('Крыша на балкон');
-      }
-    });
+  [...tabContent, ...tabBtn].forEach(function (tab, index) {
+    tab.addEventListener('click', toggleItem.bind(this, tab, tabContent, tabBtn, index));
+  });
+  
+  function toggleItem(item, siblings, tabBtn, index) {
+    for (let sibling of siblings) {
+      sibling.classList.remove('after_click');
+    }
+    for (let sibling of tabBtn) {
+      sibling.style.display = 'none';
+    }
+    item.classList.add('after_click');
+    tabBtn[index].style.display = 'block';
   }
 
 }
