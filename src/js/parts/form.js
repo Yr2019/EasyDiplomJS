@@ -1,7 +1,7 @@
 /*jshint -W117*/
 /*jshint -W083*/
 
-function form() {
+function form(objCalc) {
   let message = {
     loading: 'Загрузка...',
     success: 'Спасибо! Скоро мы с вами свяжемся',
@@ -9,17 +9,18 @@ function form() {
     check: 'Проверка пройдена',
     error: 'Нужно пройти проверку'
   };
-
+ 
   let form = document.querySelectorAll('.form'),
       statusMessage = document.createElement('div');
       statusMessage.classList.add('status');
       statusMessage.style.cssText = `
                     font-size: 12px;
                     color: red;`;            
-  let isValid = false, name ,tel, call = {}, order = {}, 
+  let isValid = false, name ,tel, call = {}, order = {}, calculate = {}, infoAll = [],
       obj = { 
         call: call,
-        order: order
+        order: order,
+        windowParameters: infoAll,
       };
 
   function checkForm(elem) {
@@ -84,6 +85,12 @@ function form() {
               formData.forEach(function (value, key) {
                 order[key] = value;
               });
+            } else if (elem[i][j].type === 'submit' && elem[i][j].innerHTML == "Рассчитать стоимость") {
+              formData.forEach(function (value, key) {
+                calculate[key] = value;
+              });
+              infoAll.push(calculate);
+              infoAll.push(objCalc);
             }
           }
           let json = JSON.stringify(obj);

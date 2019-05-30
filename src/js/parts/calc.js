@@ -1,6 +1,15 @@
 /*jshint -W117*/
 /*jshint -W083*/
 
+
+let windowWidth, windowHeight, windowType, windowSeason,
+  objCalc = {
+    windowWidth: windowWidth,
+    windowHeight: windowHeight,
+    windowType: windowType,
+    windowSeason: windowSeason,
+  };
+
 function calc() {
   let calcBtn = document.querySelectorAll('.glazing_price_btn'),
       calcModal = document.querySelector('.popup_calc'),
@@ -17,15 +26,8 @@ function calc() {
       calcModalEnd = document.querySelector('body > div.popup_calc_end'),
       calcModalEndClose = document.querySelector('body > div.popup_calc_end > div > div > button');
 
-  let windowWidth, windowHeight, windowType, windowSeason,
-      objCalc = {
-      windowWidth:    windowWidth,
-      windowHeight:   windowHeight,
-      windowType:     windowType,
-      windowSeason :  windowSeason,
-    };
-
-    
+      
+  
   function showModalCalc(show, modal, close, modcontent) {
     show.forEach(element => {
       element.addEventListener('click', function (event) {
@@ -77,7 +79,7 @@ function resultCalc(show, modal, close, calcModal) {
     if (modal == resultCalcModal) {
       resultInfo(resultBtnInfo);
     } else if (modal == calcModalEnd) {
-     // sendForm(form);  Пока не придумал как связать два модуля между собой.. Form i Calc
+
     }
   });
   close.addEventListener('click', function () {
@@ -178,4 +180,7 @@ dotsWrap.addEventListener('click', function (event) {
 });
 
 }
-module.exports = calc;
+
+//module.exports = calc;
+module.exports = { calc, objCalc};
+

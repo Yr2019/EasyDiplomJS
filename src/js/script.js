@@ -6,28 +6,26 @@
 /*jshint -W117*/
 /*jshint -W083*/
 /*jshint expr:true*/
+import { calc , objCalc} from './parts/calc.js';
+
+
 
 window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   let modal = require('./parts/modal.js'),
-      form = require('./parts/form.js'),
-      tabs = require('./parts/tabs.js'),
-      tabsdesign = require('./parts/tabsdesign.js'),
-      timer = require('./parts/timer.js'),
-      largeImage = require('./parts/largeImage.js'),
-      calc = require('./parts/calc.js');
+    form = require('./parts/form.js'),
+    tabs = require('./parts/tabs.js'),
+    tabsdesign = require('./parts/tabsdesign.js'),
+    timer = require('./parts/timer.js'),
+    largeImage = require('./parts/largeImage.js');
+   // calc = require('./parts/calc.js');
 
     modal();
-    form();
+    form(objCalc);
     tabs();
     tabsdesign();
     timer();
-    calc();
+   calc();
     largeImage();
-
-    
-    
-    
-
 });
