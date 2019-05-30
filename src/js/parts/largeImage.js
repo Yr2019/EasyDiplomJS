@@ -30,7 +30,10 @@ function ChangeImage() {
   images.forEach(function (element) {
     element.addEventListener('click', function (event) {
       event.preventDefault();
-      
+      // event.onmousewheel = function () {
+      //   document.body.style.overflow = 'hidden';
+      // };
+
       let target = event.target;
       modal.style.display = "block";
       modalImg.src = this.href;

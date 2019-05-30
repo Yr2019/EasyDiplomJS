@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', function () {
       largeImage = require('./parts/largeImage.js'),
       calc = require('./parts/calc.js');
 
-    
     modal();
     form();
     tabs();

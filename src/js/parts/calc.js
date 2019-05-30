@@ -166,8 +166,12 @@ function currentSlide(n) {
 }
 
 dotsWrap.addEventListener('click', function (event) {
+  if (event.target) {
+    event.preventDefault();
+  }
   for (let i = 0; i < dots.length + 1; i++) {
     if (event.target.classList.contains('dots') && event.target == dots[i - 1]) {
+      event.stopPropagation();
     currentSlide(i);
     }
   }

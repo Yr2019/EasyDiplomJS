@@ -261,8 +261,12 @@ function currentSlide(n) {
 }
 
 dotsWrap.addEventListener('click', function (event) {
+  if (event.target) {
+    event.preventDefault();
+  }
   for (let i = 0; i < dots.length + 1; i++) {
     if (event.target.classList.contains('dots') && event.target == dots[i - 1]) {
+      event.stopPropagation();
     currentSlide(i);
     }
   }
@@ -430,7 +434,10 @@ function ChangeImage() {
   images.forEach(function (element) {
     element.addEventListener('click', function (event) {
       event.preventDefault();
-      
+      // event.onmousewheel = function () {
+      //   document.body.style.overflow = 'hidden';
+      // };
+
       let target = event.target;
       modal.style.display = "block";
       modalImg.src = this.href;
@@ -733,7 +740,6 @@ window.addEventListener('DOMContentLoaded', function () {
       largeImage = __webpack_require__(/*! ./parts/largeImage.js */ "./src/js/parts/largeImage.js"),
       calc = __webpack_require__(/*! ./parts/calc.js */ "./src/js/parts/calc.js");
 
-    
     modal();
     form();
     tabs();
